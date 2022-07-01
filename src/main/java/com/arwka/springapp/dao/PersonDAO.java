@@ -98,7 +98,7 @@ public class PersonDAO {
     public void update(int id, Person updatedPerson) {
         try {
             PreparedStatement preparedStatement =
-                    connection.prepareStatement("UPDATE Person SET name = ?, surname = ?, age = ?, email = ? WHERE id = ?");
+                    connection.prepareStatement("UPDATE Person SET name=?, surname=?, age=?, email=? WHERE id = ?");
 
             preparedStatement.setString(1, updatedPerson.getName());
             preparedStatement.setString(2, updatedPerson.getSurname());
