@@ -68,6 +68,7 @@ public class PersonDAO {
             resultSet.next();
 
             person = new Person();
+            person.setId(resultSet.getInt("id"));
             person.setName(resultSet.getString("name"));
             person.setSurname(resultSet.getString("surname"));
             person.setAge(resultSet.getInt("age"));
