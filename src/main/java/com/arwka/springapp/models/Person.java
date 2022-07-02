@@ -23,8 +23,7 @@ public class Person {
 
     // ----------
     public Person() {}
-    public Person(int id, String name, String surname, int age, String email) {
-        this.id = id;
+    public Person(String name, String surname, int age, String email) {
         this.name = name;
         this.surname = surname;
         this.age = age;
