@@ -20,37 +20,53 @@ public class PersonDAO {
         this.sessionFactory = sessionFactory;
     }
 
-    //
     @Transactional
     public List<Person> index() {
         Session session = sessionFactory.getCurrentSession();
         return session.createQuery("SELECT p FROM Person p", Person.class).getResultList();
     }
 
-    //
+    @Transactional
     public Person show(int id) {
-        return null;
+        Session session = sessionFactory.getCurrentSession();
+        return session.get(Person.class, id);
     }
+
+    @Transactional
     public Optional<Person> show(String email) {
-        return null;
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("SELECT p FROM Person p WHERE email=:email", Person.class)
+                .setParameter("email", email)
+                .stream().findAny();
     }
-    //
+
     public void save(Person person) {
-
+        Session session = sessionFactory.getCurrentSession();
+        session.save(person);
     }
 
-    //
+    @Transactional
     public void update(int id, Person updatedPerson) {
-
+        Session session = sessionFactory.getCurrentSession();
+        Person personToBeUpdated = session.get(Person.class, id);
+        personToBeUpdated.setName(updatedPerson.getName());
+        personToBeUpdated.setSurname(updatedPerson.getSurname());
+        personToBeUpdated.setEmail(updatedPerson.getEmail());
+        personToBeUpdated.setAge(updatedPerson.getAge());
+        personToBeUpdated.setAddress(updatedPerson.getAddress());
     }
 
-    //
+    @Transactional
     public void delete(int id) {
-
+        Session session = sessionFactory.getCurrentSession();
+        Person personToDelete = session.get(Person.class, id);
+        session.remove(personToDelete);
     }
+
     /////////////////////////////////
     // testing multiple/batch update
     /////////////////////////////////
+
     public void testMultipleUpdate() {
 
     }
